@@ -1,0 +1,18 @@
+<div class="course">
+  <div class="courseContent">
+    <div class="courseHeader">
+      <p>{{data.courseData.title}}</p>
+      <div>
+        <span class="duration">{{data.courseData.duration}}</span>
+        <span class="date">{{data.courseData.creationDate | date: 'dd.MM.yyyy'}}</span>
+      </div>
+    </div>
+    <div>
+      {{data.courseData.description}}
+    </div>
+  </div>
+  <div class="controls">
+    <a class="controlsBtn">Edit</a>
+    <a class="controlsBtn">Delete</a>
+  </div>
+</div>

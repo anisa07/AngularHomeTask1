@@ -1,0 +1,36 @@
+.course {
+  margin-bottom: 10px;
+  border: 2px solid #5a5863;
+  padding: 10px;
+  display: flex;
+}
+
+.controls {
+  width: min-content;
+  margin-left: 25px;
+}
+
+.controlsBtn {
+  width: 150px;
+  height: 25px;
+  margin-bottom: 5px;
+  border: 2px solid #5a5863;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.courseHeader {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.courseHeader p {
+  margin: 0;
+}
+
+.duration {
+  margin-right: 10px;
+}
