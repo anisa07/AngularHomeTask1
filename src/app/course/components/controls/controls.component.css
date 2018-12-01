@@ -1,0 +1,14 @@
+.controls {
+  width: min-content;
+  margin-left: 25px;
+}
+
+.controlsBtn {
+  width: 150px;
+  height: 25px;
+  margin-bottom: 5px;
+  border: 2px solid #5a5863;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

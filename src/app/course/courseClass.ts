@@ -1,7 +1,16 @@
-import {CourseInterface} from './courseInterface';
+export interface Course {
+  courseData: {
+    id: string;
+    title: string;
+    creationDate: Date;
+    duration: string | number;
+    description: string;
+  };
+}
 
-export class CourseClass implements CourseInterface {
-  courseData: CourseInterface['courseData'] = {
+
+export class CourseClass implements Course {
+  courseData: Course['courseData'] = {
     id: '',
     title: '',
     creationDate: new Date(),

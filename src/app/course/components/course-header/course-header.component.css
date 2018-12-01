@@ -1,0 +1,14 @@
+.courseHeader {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.courseHeader p {
+  margin: 0;
+}
+
+.duration {
+  margin-right: 10px;
+}

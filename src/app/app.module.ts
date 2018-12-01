@@ -10,6 +10,8 @@ import { CourseComponent } from './course/course.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { CoursesComponent } from './courses/courses.component';
 import { LogoComponent } from './logo/logo.component';
+import { ControlsComponent } from './course/components/controls/controls.component';
+import { CourseHeaderComponent } from './course/components/course-header/course-header.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { LogoComponent } from './logo/logo.component';
     BreadcrumbsComponent,
     CoursesComponent,
     LogoComponent,
+    ControlsComponent,
+    CourseHeaderComponent,
   ],
   imports: [
     BrowserModule,
