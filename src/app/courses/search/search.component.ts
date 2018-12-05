@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
   @Input() searchInput: string;
 
   search() {
@@ -15,6 +15,10 @@ export class SearchComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('ngOnInit');
   }
 
+  ngOnChanges(changes) {
+    console.log('ngOnChange', changes);
+  }
 }
