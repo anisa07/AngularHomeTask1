@@ -1,0 +1,11 @@
+.loadMore {
+  height: 40px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #5a5863;
+  height: 35px;
+}

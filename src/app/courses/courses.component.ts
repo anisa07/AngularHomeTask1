@@ -9,6 +9,10 @@ import {CourseClass} from '../course/courseClass';
 export class CoursesComponent implements OnInit {
   courses: Array<CourseClass>;
 
+  deleteCourse(course) {
+    console.log(course.id);
+  }
+
   constructor() {
     this.courses = [
       new CourseClass({

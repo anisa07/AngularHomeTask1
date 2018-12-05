@@ -5,5 +5,5 @@
       {{data.courseData.description}}
     </div>
   </div>
-  <app-controls></app-controls>
+  <app-controls [data]="data" (deleteRequest)="delete()"></app-controls>
 </div>

@@ -1,3 +1,5 @@
 <div class="courses">
-  <app-course *ngFor="let data of courses" [data]="data"></app-course>
+  <app-search></app-search>
+  <app-course *ngFor="let data of courses" [data]="data" (deleteRequest)="deleteCourse($event)"></app-course>
+  <app-load-more></app-load-more>
 </div>
