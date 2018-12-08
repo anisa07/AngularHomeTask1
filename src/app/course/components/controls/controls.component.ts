@@ -1,5 +1,5 @@
 import {Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
-import {CourseClass} from '../../courseClass';
+import {Course} from '../../../models/course';
 
 @Component({
   selector: 'app-controls',
@@ -7,11 +7,11 @@ import {CourseClass} from '../../courseClass';
   styleUrls: ['./controls.component.css'],
 })
 export class ControlsComponent implements OnInit {
-  @Input() data: CourseClass;
   @Output() deleteRequest = new EventEmitter<any>();
 
-  delete() {
-    this.deleteRequest.emit(this.data);
+  deleteControl() {
+    console.log('emit delete in controls');
+    this.deleteRequest.emit();
   }
 
   constructor() { }
