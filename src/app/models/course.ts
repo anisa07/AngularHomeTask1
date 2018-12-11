@@ -9,7 +9,7 @@ export interface Course {
 }
 
 
-export class CourseClass implements Course {
+export class Course implements Course {
   courseData: Course['courseData'] = {
     id: '',
     title: '',
