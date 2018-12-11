@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges} from '@angular/core';
 import { Course } from '../models/course';
 
 @Component({
@@ -26,9 +26,9 @@ export class CourseComponent implements OnInit, OnChanges {
     console.log(this.fakeVar);
   }
 
-  ngOnChanges(...args: any[]) {
+  ngOnChanges(changes: SimpleChanges) {
     console.log('onChange hook called');
-    console.log('changing', args);
+    console.log('changing', changes);
   }
 
 }
