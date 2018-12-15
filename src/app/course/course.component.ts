@@ -30,5 +30,4 @@ export class CourseComponent implements OnInit, OnChanges {
     console.log('onChange hook called');
     console.log('changing', changes);
   }
-
 }

@@ -1,6 +1,4 @@
-import {Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
-import {Course} from '../../../models/course';
-
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 @Component({
   selector: 'app-controls',
   templateUrl: './controls.component.html',
@@ -16,7 +14,5 @@ export class ControlsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

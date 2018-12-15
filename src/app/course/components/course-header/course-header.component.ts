@@ -11,7 +11,5 @@ export class CourseHeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
