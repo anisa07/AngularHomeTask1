@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Breadcrumb} from './breadcrumb';
 
 @Component({
@@ -8,10 +8,8 @@ import {Breadcrumb} from './breadcrumb';
 })
 export class BreadcrumbComponent implements OnInit {
   @Input() crumb: Breadcrumb;
-  constructor() {
-  }
 
-  ngOnInit() {
-  }
+  constructor() { }
 
+  ngOnInit() {}
 }

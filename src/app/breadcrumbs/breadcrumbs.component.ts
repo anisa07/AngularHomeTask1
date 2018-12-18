@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Breadcrumb } from '../breadcrumb/breadcrumb';
 
 @Component({
@@ -14,5 +14,4 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   ngOnInit() {}
-
 }
