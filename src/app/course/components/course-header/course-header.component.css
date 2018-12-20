@@ -7,8 +7,26 @@
 
 .courseHeader p {
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .duration {
   margin-right: 10px;
+}
+
+a {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+  background-size: 16px;
+}
+
+.topRated {
+  background-image: url('../../../../img/gold-star.png');
+}
+
+.notRated {
+  background-image: url('../../../../img/star.png');
 }

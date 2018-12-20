@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { CourseHeaderComponent } from './course-header.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Course } from '../../../models/course';
+import { TimePipe } from '../../../pipes/time-pipe.pipe';
 
 @Component({
   template: '<app-course-header [data]="course"></app-course-header>',
@@ -22,7 +24,8 @@ describe('CourseHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestComponent, CourseHeaderComponent ],
+      declarations: [ TestComponent, CourseHeaderComponent, TimePipe ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
   }));
 
@@ -38,7 +41,7 @@ describe('CourseHeaderComponent', () => {
 
   it('should have title "Test"', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('p').textContent).toContain('Test');
+    expect(compiled.querySelector('p').textContent).toContain('TEST');
   });
 
   it('should have date', () => {

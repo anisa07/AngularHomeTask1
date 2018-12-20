@@ -18,6 +18,9 @@ import { LoadMoreComponent } from './courses/load-more/load-more.component';
 import { FakeComponentComponent } from './fake-component/fake-component.component';
 import { CoursesComponent } from './courses/courses.component';
 import { routes } from './routes';
+import { BorderDirective } from './directives/border-directive.directive';
+import { TimePipe } from './pipes/time-pipe.pipe';
+import { ListPipe } from './pipes/list-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { routes } from './routes';
     SearchComponent,
     LoadMoreComponent,
     FakeComponentComponent,
+    BorderDirective,
+    TimePipe,
+    ListPipe,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,7 @@ import { routes } from './routes';
     RouterModule.forRoot(routes),
   ],
   bootstrap: [AppComponent],
+  providers: [ListPipe],
 })
 export class AppModule implements OnInit {
   constructor() { }

@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import {Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
+import {ListPipe} from '../../pipes/list-pipe.pipe';
+import {Course} from '../../models/course';
 
 @Component({
   selector: 'app-search',
@@ -7,12 +9,21 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 })
 export class SearchComponent implements OnInit, OnChanges {
   @Input() searchInput: string;
+  @Input() data: Array<Course>;
+  @Output() filterData = new EventEmitter<any>();
+  @Output() clearFilter = new EventEmitter<any>();
 
   search() {
-    console.log(this.searchInput);
+    this.filterData.emit(this.listPipe.transform(this.data, this.searchInput));
   }
 
-  constructor() { }
+  clear() {
+    this.clearFilter.emit(true);
+    this.searchInput = '';
+  }
+
+  constructor(private listPipe: ListPipe) {
+  }
 
   ngOnInit() {
     console.log('ngOnInit');

@@ -22,7 +22,7 @@ export class Course implements Course {
     if (courseData) {
       this.courseData.title = courseData.title;
       this.courseData.creationDate = courseData.creationDate;
-      this.courseData.duration = `${Math.floor(courseData.duration / 60)}h ${courseData.duration % 60}min`;
+      this.courseData.duration = courseData.duration;
       this.courseData.description = courseData.description;
       this.courseData.id = courseData.id;
     }

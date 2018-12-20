@@ -8,8 +8,16 @@ import {Course} from '../../../models/course';
 })
 export class CourseHeaderComponent implements OnInit {
   @Input() data: Course;
+  topRated: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.topRated = false;
+  }
+
+  triggerTopRated() {
+    this.topRated = !this.topRated;
+  }
 }
