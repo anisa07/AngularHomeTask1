@@ -21,6 +21,7 @@ import { routes } from './routes';
 import { BorderDirective } from './directives/border-directive.directive';
 import { TimePipe } from './pipes/time-pipe.pipe';
 import { ListPipe } from './pipes/list-pipe.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ListPipe } from './pipes/list-pipe.pipe';
     BorderDirective,
     TimePipe,
     ListPipe,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ import { ListPipe } from './pipes/list-pipe.pipe';
     RouterModule.forRoot(routes),
   ],
   bootstrap: [AppComponent],
-  providers: [ListPipe],
+  providers: [ListPipe, OrderByPipe],
 })
 export class AppModule implements OnInit {
   constructor() { }
