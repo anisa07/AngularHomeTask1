@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {OrderByPipe} from '../pipes/order-by.pipe';
 import {Course} from '../models/course';
 
 @Component({
@@ -8,39 +9,60 @@ import {Course} from '../models/course';
 })
 export class CoursesComponent implements OnInit {
   courses: Array<Course>;
+  backup: Array<Course>;
 
   deleteCourse(id) {
     console.log('courseId = ', id);
   }
 
-  constructor() {
-    this.courses = [
+  filterCourses(result) {
+    this.courses = this.orderBy.transform(result.slice());
+  }
+
+  clearFilterResults(clearSearchResults) {
+    if (clearSearchResults) {
+      this.courses = this.orderBy.transform(this.backup.slice());
+    }
+  }
+
+  constructor(private orderBy: OrderByPipe) {
+    this.backup = [
       new Course({
-        id: '123aaa',
-        title: 'First Video',
-        creationDate: new Date('10 06 2018'),
-        duration: 160,
+        id: '123bbb',
+        title: 'Second Video',
+        creationDate: new Date('12 15 2018'),
+        duration: 100,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
           'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
       }),
       new Course({
-        id: '123bbb',
-        title: 'Second Video',
-        creationDate: new Date('10 20 2018'),
-        duration: 100,
+        id: '123aaa',
+        title: 'First Video',
+        creationDate: new Date('10 06 2018'),
+        duration: 120,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
           'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
       }),
       new Course({
         id: '123ccc',
         title: 'Third Video',
-        creationDate: new Date('11 01 2018'),
-        duration: 60,
+        creationDate: new Date('01 15 2019'),
+        duration: 55,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
+          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
+      }),
+      new Course({
+        id: '123ddd',
+        title: 'Forth Video',
+        creationDate: new Date('01 15 2018'),
+        duration: 156,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
           'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
       }),
     ];
   }
 
-  ngOnInit () {}
+  ngOnInit() {
+    this.courses = this.orderBy.transform(this.backup.slice());
+  }
 }

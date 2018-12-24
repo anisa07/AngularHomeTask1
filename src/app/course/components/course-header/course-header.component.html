@@ -1,7 +1,9 @@
 <div class="courseHeader">
-  <p>{{data.courseData.title}}</p>
+  <p>{{data.courseData.title | uppercase}}
+    <a [ngClass]="{topRated: topRated, notRated: !topRated}" (click)="triggerTopRated()"></a>
+  </p>
   <div>
-    <span class="duration">{{data.courseData.duration}}</span>
+    <span class="duration">{{data.courseData.duration | timePipe}}</span>
     <span class="date">{{data.courseData.creationDate | date: 'dd.MM.yyyy'}}</span>
   </div>
 </div>
