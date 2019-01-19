@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {OrderByPipe} from '../pipes/order-by.pipe';
-import {Course} from '../models/course';
+import { Component, OnInit } from '@angular/core';
+import { OrderByPipe } from '../pipes/order-by.pipe';
+import { Course } from '../models/course';
+import { CoursesService } from './courses-service.service';
 
 @Component({
   selector: 'app-courses',
@@ -9,10 +10,12 @@ import {Course} from '../models/course';
 })
 export class CoursesComponent implements OnInit {
   courses: Array<Course>;
-  backup: Array<Course>;
 
   deleteCourse(id) {
-    console.log('courseId = ', id);
+    const removeCourse = confirm('Do you really want to delete this course?');
+    if (removeCourse) {
+      this.courses = this.orderBy.transform(this.coursesService.removeCourse(id));
+    }
   }
 
   filterCourses(result) {
@@ -21,48 +24,13 @@ export class CoursesComponent implements OnInit {
 
   clearFilterResults(clearSearchResults) {
     if (clearSearchResults) {
-      this.courses = this.orderBy.transform(this.backup.slice());
+      this.courses = this.orderBy.transform(this.coursesService.getCourses());
     }
   }
 
-  constructor(private orderBy: OrderByPipe) {
-    this.backup = [
-      new Course({
-        id: '123bbb',
-        title: 'Second Video',
-        creationDate: new Date('12 15 2018'),
-        duration: 100,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-      new Course({
-        id: '123aaa',
-        title: 'First Video',
-        creationDate: new Date('10 06 2018'),
-        duration: 120,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-      new Course({
-        id: '123ccc',
-        title: 'Third Video',
-        creationDate: new Date('01 15 2019'),
-        duration: 55,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-      new Course({
-        id: '123ddd',
-        title: 'Forth Video',
-        creationDate: new Date('01 15 2018'),
-        duration: 156,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-    ];
-  }
+  constructor(private orderBy: OrderByPipe, private coursesService: CoursesService) {}
 
   ngOnInit() {
-    this.courses = this.orderBy.transform(this.backup.slice());
+    this.courses = this.orderBy.transform(this.coursesService.getCourses());
   }
 }

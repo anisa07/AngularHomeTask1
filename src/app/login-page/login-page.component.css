@@ -1,0 +1,46 @@
+.login-page {
+  position: relative;
+  /*height: 600px;*/
+}
+
+.login-container {
+  width: 350px;
+  /*height: 200px;*/
+  margin: 10% auto;
+  border: 1px solid #5a5863;
+}
+
+.login-title {
+  border-bottom: 1px solid #5a5863;
+  padding: 7px 5px;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+}
+
+.login-controls {
+  padding: 10% 25%;
+}
+
+.login-controls p {
+  margin-bottom: 5px
+}
+
+.btn {
+  margin-top: 10px;
+  display: inline-block;
+  border: 1px solid #5a5863;
+  padding: 5px;
+}
+
+.disabledLogin {
+  pointer-events: none;
+  cursor: default;
+  background-color: #BBBBAA;
+  color: #EEEEEE;
+  border: none;
+}
+
+.login-controls input {
+  font-size: 16px;
+}

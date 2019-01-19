@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, OnInit} from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +23,7 @@ import { BorderDirective } from './directives/border-directive.directive';
 import { TimePipe } from './pipes/time-pipe.pipe';
 import { ListPipe } from './pipes/list-pipe.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -43,14 +45,17 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     TimePipe,
     ListPipe,
     OrderByPipe,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
+    // BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent],
   providers: [ListPipe, OrderByPipe],
+  exports: [RouterModule],
 })
 export class AppModule implements OnInit {
   constructor() { }
