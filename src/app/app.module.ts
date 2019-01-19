@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -51,7 +50,6 @@ import { LoginPageComponent } from './login-page/login-page.component';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    // BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent],
   providers: [ListPipe, OrderByPipe],

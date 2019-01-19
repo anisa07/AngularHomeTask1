@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -9,6 +10,7 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
+      imports: [ RouterTestingModule ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
   }));
@@ -31,8 +33,6 @@ describe('HeaderComponent', () => {
   it('should have user and logout links', () => {
     const compiled = fixture.debugElement.nativeElement;
     const links = compiled.querySelectorAll('a');
-    expect(links.length).toBe(2);
-    expect(links[0].textContent).toContain('User login');
-    expect(links[1].textContent).toContain('Log Off');
+    expect(links.length).toBe(0);
   });
 });
