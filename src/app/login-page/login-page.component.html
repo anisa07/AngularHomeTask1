@@ -1,0 +1,19 @@
+<div class="login-page">
+  <div class="login-container">
+    <p class="login-title">Login</p>
+    <div class="login-controls">
+      <div class="email">
+        <p>Email</p>
+        <input placeholder="Please enter email" [(ngModel)]="email"/>
+      </div>
+      <div class="pwd">
+        <p>Password</p>
+        <input placeholder="Please enter password" type="password" [(ngModel)]="password"/>
+      </div>
+      <a
+        class="btn"
+        [class.disabledLogin]="!loginEnable() ? true : null"
+        (click)="login()">Login</a>
+    </div>
+  </div>
+</div>
