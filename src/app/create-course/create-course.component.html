@@ -1,0 +1,26 @@
+<div class="content-container">
+  <div>
+    <p class="element-title">Title:</p>
+    <input type="text" class="wide-element" [(ngModel)]="title"/>
+  </div>
+  <div>
+    <p class="element-title">Description:</p>
+    <textarea rows="5" class="wide-element" [(ngModel)]="description"></textarea>
+  </div>
+  <div>
+    <p class="element-title">Date:</p>
+    <input type="date" [(ngModel)]="date"/>
+  </div>
+  <div>
+    <p class="element-title">Duration:</p>
+    <input type="text" [(ngModel)]="duration"/><span class="duration">{{duration | timePipe}}</span>
+  </div>
+  <div>
+    <p class="element-title">Authors:</p>
+    <input type="text" class="wide-element"/>
+  </div>
+  <div class="controls">
+    <a class="btn" (click)="save()">Save</a>
+    <a class="btn" (click)="delete()">Delete</a>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.content-container {
+  padding: 10px 20px 10px 10px;
+}
+
+.wide-element {
+  width: 100%;
+}
+
+.element-title {
+  margin-bottom: 5px;
+}
+
+.controls {
+  margin: 10px 0;
+}
+
+.btn {
+  width: 50px;
+  height: 25px;
+  display: inline-block;
+  margin-bottom: 5px;
+  border: 2px solid #5a5863;
+  margin-right: 5px;
+  text-align: center;
+  padding-top: 7px;
+}
+
+.duration {
+  margin-left: 10px;
+}
