@@ -23,6 +23,7 @@ import { TimePipe } from './pipes/time-pipe.pipe';
 import { ListPipe } from './pipes/list-pipe.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { CreateCourseComponent } from './create-course/create-course.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     ListPipe,
     OrderByPipe,
     LoginPageComponent,
+    CreateCourseComponent,
   ],
   imports: [
     BrowserModule,

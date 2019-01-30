@@ -50,8 +50,7 @@ export class CoursesService {
 
   createCourse(courseData) {
     const course = new Course(courseData);
-
-    this.courses.push(course);
+    this.courses = [...this.courses, course];
 
     return this.courses;
   }
