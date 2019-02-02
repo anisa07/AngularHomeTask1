@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
+import {Router} from '@angular/router';
 import {ListPipe} from '../../pipes/list-pipe.pipe';
 import {Course} from '../../models/course';
 
@@ -22,7 +23,11 @@ export class SearchComponent implements OnInit, OnChanges {
     this.searchInput = '';
   }
 
-  constructor(private listPipe: ListPipe) {
+  add() {
+    this.router.navigate(['create/new']);
+  }
+
+  constructor(private listPipe: ListPipe, private router: Router) {
   }
 
   ngOnInit() {

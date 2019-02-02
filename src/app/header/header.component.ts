@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login-page/login.service';
+import {CrumbsService} from '../crumbs.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { LoginService } from '../login-page/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private crumbsService: CrumbsService) { }
 
   authorized() {
     return this.loginService.isAuthenticated();
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.loginService.logOut();
+    this.crumbsService.removeCrumbs();
     this.router.navigate(['login']);
   }
 

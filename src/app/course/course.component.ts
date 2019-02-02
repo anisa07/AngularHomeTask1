@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, ChangeDetectionStrategy} from '@angular/core';
 import { Course } from '../models/course';
+import {CrumbsService} from '../crumbs.service';
 
 @Component({
   selector: 'app-course',
@@ -17,7 +18,11 @@ export class CourseComponent implements OnInit, OnChanges {
     this.deleteRequest.emit(this.data.courseData.id);
   }
 
-  constructor() {
+  edit() {
+    this.crumbsService.addNewCrumb(this.data.courseData.title, ['/course', this.data.courseData.id]);
+  }
+
+  constructor(private crumbsService: CrumbsService) {
     this.fakeVar = 'fakeVar init in constructor';
     console.log('log in course constructor');
   }

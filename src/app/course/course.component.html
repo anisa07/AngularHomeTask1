@@ -5,5 +5,5 @@
       {{data.courseData.description}}
     </div>
   </div>
-  <app-controls (deleteRequest)="delete()"></app-controls>
+  <app-controls [id]="data.courseData.id" (deleteRequest)="delete()" (editRequest)="edit()"></app-controls>
 </div>

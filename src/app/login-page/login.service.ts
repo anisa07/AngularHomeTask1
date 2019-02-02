@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class LoginService implements CanActivate {
 
-  constructor() {
+  constructor(public router: Router) {
   }
 
   login(email) {
@@ -31,5 +32,13 @@ export class LoginService {
     const storage = window.localStorage;
 
     return !!storage.getItem('AmazingToken');
+  }
+
+  canActivate(): boolean {
+    if (!this.isAuthenticated()) {
+      this.router.navigate(['login']);
+      return false;
+    }
+    return true;
   }
 }

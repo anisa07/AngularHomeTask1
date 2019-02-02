@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Breadcrumb} from './breadcrumb';
+import {CrumbsService} from '../crumbs.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -8,8 +10,18 @@ import {Breadcrumb} from './breadcrumb';
 })
 export class BreadcrumbComponent implements OnInit {
   @Input() crumb: Breadcrumb;
+  @Input() index: number;
 
-  constructor() { }
+  constructor(private crumbsService: CrumbsService, private router: Router) {
+  }
 
-  ngOnInit() {}
+  navigateCrumb() {
+    const route = this.crumbsService.getLink(this.index);
+
+    this.crumbsService.removeTailCrumbs(this.index);
+    this.router.navigate(route);
+  }
+
+  ngOnInit() {
+  }
 }

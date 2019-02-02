@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import { Breadcrumb } from '../breadcrumb/breadcrumb';
 
 @Component({
@@ -7,10 +7,10 @@ import { Breadcrumb } from '../breadcrumb/breadcrumb';
   styleUrls: ['./breadcrumbs.component.css'],
 })
 export class BreadcrumbsComponent implements OnInit {
-  crumbs: Array<Breadcrumb>;
+  @Input() crumbs: Array<Breadcrumb> = [];
 
   constructor() {
-    this.crumbs = [new Breadcrumb('Courses')];
+    // this.crumbs = [new Breadcrumb('Courses', '/courses')];
   }
 
   ngOnInit() {}
