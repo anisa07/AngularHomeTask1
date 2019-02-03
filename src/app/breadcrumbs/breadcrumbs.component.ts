@@ -9,9 +9,7 @@ import { Breadcrumb } from '../breadcrumb/breadcrumb';
 export class BreadcrumbsComponent implements OnInit {
   @Input() crumbs: Array<Breadcrumb> = [];
 
-  constructor() {
-    // this.crumbs = [new Breadcrumb('Courses', '/courses')];
-  }
+  constructor() {}
 
   ngOnInit() {}
 }

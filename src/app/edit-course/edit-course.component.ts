@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CoursesService } from '../courses/courses-service.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CoursesService} from '../courses/courses-service.service';
 import {CrumbsService} from '../crumbs.service';
 
 @Component({
@@ -9,14 +9,17 @@ import {CrumbsService} from '../crumbs.service';
   styleUrls: ['./edit-course.component.css'],
 })
 export class EditCourseComponent implements OnInit {
-  course: object;
+  course;
 
   constructor(private coursesService: CoursesService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute, private crumbsService: CrumbsService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.course = this.coursesService.getCourseById(params['id']) || {};
+      this.crumbsService.getBreadCrumbs();
+      this.crumbsService.addNewCrumb(this.course.courseData.title, []);
     });
   }
 

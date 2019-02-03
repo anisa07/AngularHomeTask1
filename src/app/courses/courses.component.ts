@@ -29,14 +29,12 @@ export class CoursesComponent implements OnInit {
 
   clearFilterResults(clearSearchResults) {
     if (clearSearchResults) {
-      this.courses = this.orderBy.transform(this.coursesService.getInitialCourses());
+      this.courses = this.orderBy.transform(this.coursesService.getCourses());
     }
   }
 
   ngOnInit() {
     this.courses = this.orderBy.transform(this.coursesService.getCourses());
-    if (!this.crumbsService.alreadyHaveCrumb('Courses')) {
-      this.crumbsService.addNewCrumb('Courses', ['/courses']);
-    }
+    this.crumbsService.removeTailCrumbs();
   }
 }

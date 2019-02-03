@@ -7,19 +7,20 @@ import {Breadcrumb} from './breadcrumb/breadcrumb';
 export class CrumbsService {
   breadcrumbs: Array<Breadcrumb> = [];
 
-  constructor() {
-  }
+  constructor() {}
 
   getBreadCrumbs() {
     return this.breadcrumbs;
   }
 
   addNewCrumb(text, link) {
-    this.breadcrumbs = [...this.breadcrumbs, new Breadcrumb(text, link)];
+    if (!this.alreadyHaveCrumb(text)) {
+      this.breadcrumbs = [...this.breadcrumbs, new Breadcrumb(text, link)];
+    }
   }
 
-  removeTailCrumbs(itemNum) {
-    this.breadcrumbs = this.breadcrumbs.slice(0, itemNum + 1);
+  removeTailCrumbs() {
+    this.breadcrumbs = this.breadcrumbs.slice(0, 1);
   }
 
   getLink(item) {
@@ -31,6 +32,6 @@ export class CrumbsService {
   }
 
   alreadyHaveCrumb(text) {
-    return this.breadcrumbs.find(crumb => crumb.text === text);
+    return this.getBreadCrumbs().find(crumb => crumb.text === text);
   }
 }

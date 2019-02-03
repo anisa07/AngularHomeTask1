@@ -18,7 +18,7 @@ export class BreadcrumbComponent implements OnInit {
   navigateCrumb() {
     const route = this.crumbsService.getLink(this.index);
 
-    this.crumbsService.removeTailCrumbs(this.index);
+    this.crumbsService.removeTailCrumbs();
     this.router.navigate(route);
   }
 
