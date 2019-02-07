@@ -9,7 +9,7 @@
   </div>
   <div>
     <p class="element-title">Date:</p>
-    <input type="date" [(ngModel)]="date"/>
+    <input type="text" [(ngModel)]="date"/>
   </div>
   <div>
     <p class="element-title">Duration:</p>
@@ -21,6 +21,7 @@
   </div>
   <div class="controls">
     <a class="btn" (click)="save()">Save</a>
-    <a class="btn" (click)="delete()">Delete</a>
+    <a *ngIf="createCourse" class="btn" (click)="delete()">Delete</a>
+    <a *ngIf="!createCourse" class="btn" (click)="cancel()">Cancel</a>
   </div>
 </div>

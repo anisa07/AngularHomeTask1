@@ -1,3 +1,4 @@
-<div class="breadcrumbs">
-  <app-breadcrumb *ngFor="let j of crumbs" [crumb]="j"></app-breadcrumb>
+<div class="breadcrumbs" *ngIf="crumbs.length">
+  <a routerLink={{crumbs[0].link}} routerLinkActive="active">{{crumbs[0].text}} </a>
+  <a *ngIf="crumbs[1]"> /{{crumbs[1].text}}</a>
 </div>

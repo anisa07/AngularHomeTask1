@@ -24,6 +24,8 @@ import { ListPipe } from './pipes/list-pipe.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { CreateCourseComponent } from './create-course/create-course.component';
     OrderByPipe,
     LoginPageComponent,
     CreateCourseComponent,
+    NotFoundComponent,
+    EditCourseComponent,
   ],
   imports: [
     BrowserModule,

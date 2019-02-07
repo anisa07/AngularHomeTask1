@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { FakeComponentComponent } from './fake-component/fake-component.component';
-import { ContentComponent } from './content/content.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CoursesComponent } from './courses/courses.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
+import { LoginService } from './login-page/login.service';
 
 export const routes: Routes = [
-  { path: 'content', component: ContentComponent },
-  { path: 'fake', component: FakeComponentComponent },
+  { path: '', redirectTo: 'courses', pathMatch: 'full' },
+  { path: 'courses', component: CoursesComponent, canActivate: [LoginService] },
+  { path: 'course/:id', component: EditCourseComponent, canActivate: [LoginService] },
+  { path: 'create/new', component: CreateCourseComponent, canActivate: [LoginService] },
   { path: 'login', component: LoginPageComponent },
-  { path: 'create-course', component: CreateCourseComponent },
-  { path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+  { path: '**', component: NotFoundComponent },
 ];

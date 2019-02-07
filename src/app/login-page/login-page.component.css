@@ -1,12 +1,11 @@
 .login-page {
   position: relative;
-  /*height: 600px;*/
+  padding-top: 150px;
 }
 
 .login-container {
   width: 350px;
-  /*height: 200px;*/
-  margin: 10% auto;
+  margin: auto;
   border: 1px solid #5a5863;
 }
 

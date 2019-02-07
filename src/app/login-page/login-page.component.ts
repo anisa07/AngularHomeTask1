@@ -15,14 +15,14 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     if (this.loginService.isAuthenticated()) {
-      this.router.navigate(['content']);
+      this.router.navigate(['courses']);
     }
   }
 
   login() {
     this.loginService.login(this.email);
     console.log('logged in successfully');
-    this.router.navigate(['content']);
+    this.router.navigate(['courses']);
   }
 
   loginEnable() {
