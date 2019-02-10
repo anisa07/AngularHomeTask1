@@ -10,31 +10,47 @@ import {CrumbsService} from '../crumbs.service';
   styleUrls: ['./courses.component.css'],
 })
 export class CoursesComponent implements OnInit {
-  courses: Array<Course>;
+  courses: Array<Course> = [];
+  start: Number = 0;
+  count: any = 5;
 
   constructor(private orderBy: OrderByPipe,
               private coursesService: CoursesService,
-              private crumbsService: CrumbsService) {}
-
-  deleteCourse(id) {
-    const removeCourse = confirm('Do you really want to delete this course?');
-    if (removeCourse) {
-      this.courses = this.orderBy.transform(this.coursesService.removeCourse(id));
-    }
+              private crumbsService: CrumbsService) {
   }
 
-  filterCourses(result) {
-    this.courses = this.orderBy.transform(result.slice());
+  deleteCourse(id) {
+    // const removeCourse = confirm('Do you really want to delete this course?');
+    // if (removeCourse) {
+    //   this.courses = this.orderBy.transform(this.coursesService.removeCourse(id));
+    // }
+  }
+
+  filterCourses(searchInput) {
+    this.coursesService.searchCourses(searchInput).subscribe((response: Array<any>) => {
+      this.courses = this.orderBy.transform(response);
+    });
+  }
+
+  loadMore() {
+    this.count = this.count + 1;
+    this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
+      this.courses = this.orderBy.transform(response);
+    });
   }
 
   clearFilterResults(clearSearchResults) {
     if (clearSearchResults) {
-      this.courses = this.orderBy.transform(this.coursesService.getCourses());
+      this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
+        this.courses = this.orderBy.transform(response);
+      });
     }
   }
 
   ngOnInit() {
-    this.courses = this.orderBy.transform(this.coursesService.getCourses());
+    this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
+      this.courses = this.orderBy.transform(response);
+    });
     this.crumbsService.removeTailCrumbs();
   }
 }

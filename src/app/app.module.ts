@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -26,6 +27,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
+import { Interceptor } from './login-page/interceptor';
 
 @NgModule({
   declarations: [
@@ -54,11 +56,16 @@ import { EditCourseComponent } from './edit-course/edit-course.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
   ],
   bootstrap: [AppComponent],
-  providers: [ListPipe, OrderByPipe],
+  providers: [ListPipe, OrderByPipe, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true,
+  }],
   exports: [RouterModule],
 })
 export class AppModule implements OnInit {

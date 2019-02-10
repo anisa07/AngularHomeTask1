@@ -1,30 +1,26 @@
 export interface Course {
-  courseData: {
-    id: string;
-    title: string;
-    creationDate: Date;
-    duration: string | number;
-    description: string;
-  };
+  id: string;
+  name: string;
+  date: Date;
+  length: number;
+  description: string;
 }
 
 
 export class Course implements Course {
-  courseData: Course['courseData'] = {
-    id: '',
-    title: '',
-    creationDate: new Date(),
-    duration: '',
-    description: '',
-  };
+  id = '';
+  name = '';
+  date = new Date();
+  length = 0;
+  description = '';
 
   constructor(courseData: {id: string, title: string, creationDate: Date, duration: number, description: string}) {
     if (courseData) {
-      this.courseData.title = courseData.title;
-      this.courseData.creationDate = courseData.creationDate;
-      this.courseData.duration = courseData.duration;
-      this.courseData.description = courseData.description;
-      this.courseData.id = courseData.id;
+      this.name = courseData.title;
+      this.date = courseData.creationDate;
+      this.length = courseData.duration;
+      this.description = courseData.description;
+      this.id = courseData.id;
     }
   }
 }

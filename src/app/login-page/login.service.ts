@@ -1,19 +1,22 @@
 import {Injectable} from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import {Router, CanActivate} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+const BASE_URL = 'http://localhost:3004/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService implements CanActivate {
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private http: HttpClient) {
   }
 
-  login(email) {
-    const storage = window.localStorage;
-
-    storage.setItem('SuperSecretLogin', email);
-    storage.setItem('AmazingToken', 'FakeTokenIsHere');
+  login(login, password) {
+    return this.http.post(`${BASE_URL}/login`, JSON.stringify({
+      login,
+      password,
+    }));
   }
 
   logOut() {
@@ -22,10 +25,19 @@ export class LoginService implements CanActivate {
     storage.clear();
   }
 
-  getUserInfo() {
+  getToken() {
     const storage = window.localStorage;
 
-    return storage.getItem('SuperSecretLogin');
+    return storage.getItem('AmazingToken');
+  }
+
+  getUserInfo() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken(),
+    });
+
+    return this.http.post(`${BASE_URL}/userinfo`, JSON.stringify({}), {headers: headers});
   }
 
   isAuthenticated() {

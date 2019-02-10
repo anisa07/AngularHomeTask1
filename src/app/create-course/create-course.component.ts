@@ -21,13 +21,11 @@ export class CreateCourseComponent implements OnInit {
 
   ngOnInit() {
     if (this.data) {
-      const {courseData} = this.data;
-
       this.createCourse = false;
-      this.date = courseData.creationDate;
-      this.duration = courseData.duration;
-      this.title = courseData.title;
-      this.description = courseData.description;
+      this.date = this.data.date;
+      this.duration = this.data.length;
+      this.title = this.data.name;
+      this.description = this.data.description;
     }
   }
 
@@ -38,7 +36,7 @@ export class CreateCourseComponent implements OnInit {
         duration: this.duration,
         title: this.title,
         description: this.description,
-        id: this.data.courseData.id,
+        id: this.data.id,
       });
     }
     this.router.navigate(['courses']);

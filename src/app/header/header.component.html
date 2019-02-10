@@ -1,7 +1,7 @@
 <div class="header">
   <app-logo></app-logo>
   <div>
-    <a *ngIf="authorized()">{{userName()}}</a>
-    <a *ngIf="authorized()" class="logOff" (click)="logOut()">Log Off</a>
+    <a>{{ login }}</a>
+    <a *ngIf="login" class="logOff" (click)="logOut()">Log Off</a>
   </div>
 </div>

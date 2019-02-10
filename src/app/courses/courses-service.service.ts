@@ -1,18 +1,25 @@
 import {Injectable} from '@angular/core';
 import {Course} from '../models/course';
+import {HttpClient} from '@angular/common/http';
+
+const BASE_URL = 'http://localhost:3004/courses';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CoursesService {
+export class CoursesService  {
   courses: Array<Course>;
 
-  constructor() {
-    this.courses = this.getInitialCourses();
+  constructor(private http: HttpClient) {
+    this.courses = [];
   }
 
-  getCourses(): Course[] {
-    return this.courses;
+  searchCourses(searchInput) {
+    return this.http.get(`${BASE_URL}`, {params: {textFragment: searchInput}});
+  }
+
+  getCourses(start, count) {
+    return this.http.get(`${BASE_URL}?start=${start}&count=${count}`);
   }
 
   getInitialCourses(): Course[] {
@@ -60,23 +67,23 @@ export class CoursesService {
   }
 
   getCourseById(id) {
-    return this.getCourses().find(course => course.courseData.id === id);
+   // return this.getCourses().find(course => course.courseData.id === id);
   }
 
   updateCourse({date, duration, title, description, id}) {
     this.courses = this.courses.slice().map(course => {
-      if (course.courseData.id === id) {
-        course.courseData.description = description;
-        course.courseData.title = title;
-        course.courseData.creationDate = date;
-        course.courseData.duration = duration;
-      }
+      // if (course.courseData.id === id) {
+      //   course.courseData.description = description;
+      //   course.courseData.name = title;
+      //   course.courseData.creationDate = date;
+      //   course.courseData.length = duration;
+      // }
       return course;
     });
   }
 
   removeCourse(id) {
-    this.courses = this.courses.filter(course => course.courseData.id !== id);
+    // this.courses = this.courses.filter(course => course.courseData.id !== id);
 
     return this.courses;
   }

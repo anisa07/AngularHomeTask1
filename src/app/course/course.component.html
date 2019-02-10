@@ -1,9 +1,9 @@
-<div class="course" [appBorderDirective]="data.courseData.creationDate">
+<div class="course" [appBorderDirective]="data.date">
   <div class="courseContent">
     <app-course-header [data]="data"></app-course-header>
     <div class="courseDescription">
-      {{data.courseData.description}}
+      {{data.description}}
     </div>
   </div>
-  <app-controls [id]="data.courseData.id" (deleteRequest)="delete()" (editRequest)="edit()"></app-controls>
+  <app-controls [id]="data.id" (deleteRequest)="delete()" (editRequest)="edit()"></app-controls>
 </div>
