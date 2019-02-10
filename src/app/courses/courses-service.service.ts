@@ -59,32 +59,30 @@ export class CoursesService  {
     ];
   }
 
-  createCourse(courseData) {
-    const course = new Course(courseData);
-    this.courses = [...this.courses, course];
-
-    return this.courses;
+  createCourse({date, length, name, description, authors}) {
+    return this.http.post(`${BASE_URL}`, JSON.stringify({
+      date,
+      length,
+      description,
+      authors,
+    }));
   }
 
   getCourseById(id) {
-   // return this.getCourses().find(course => course.courseData.id === id);
+   return this.http.get(`${BASE_URL}/${id}`);
   }
 
-  updateCourse({date, duration, title, description, id}) {
-    this.courses = this.courses.slice().map(course => {
-      // if (course.courseData.id === id) {
-      //   course.courseData.description = description;
-      //   course.courseData.name = title;
-      //   course.courseData.creationDate = date;
-      //   course.courseData.length = duration;
-      // }
-      return course;
-    });
+  updateCourse({date, length, name, description, id, authors}) {
+    return this.http.put(`${BASE_URL}/${id}`, JSON.stringify({
+      date,
+      length,
+      description,
+      id,
+      authors,
+    }));
   }
 
   removeCourse(id) {
-    // this.courses = this.courses.filter(course => course.courseData.id !== id);
-
-    return this.courses;
+    return this.http.delete(`${BASE_URL}/${id}`);
   }
 }

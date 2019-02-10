@@ -19,11 +19,19 @@ export class CoursesComponent implements OnInit {
               private crumbsService: CrumbsService) {
   }
 
+  getCourses() {
+    this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
+      this.courses = this.orderBy.transform(response);
+    });
+  }
+
   deleteCourse(id) {
-    // const removeCourse = confirm('Do you really want to delete this course?');
-    // if (removeCourse) {
-    //   this.courses = this.orderBy.transform(this.coursesService.removeCourse(id));
-    // }
+    const removeCourse = confirm('Do you really want to delete this course?');
+    if (removeCourse) {
+      this.coursesService.removeCourse(id).subscribe(() => {
+        this.getCourses();
+      });
+    }
   }
 
   filterCourses(searchInput) {
@@ -34,23 +42,17 @@ export class CoursesComponent implements OnInit {
 
   loadMore() {
     this.count = this.count + 1;
-    this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
-      this.courses = this.orderBy.transform(response);
-    });
+    this.getCourses();
   }
 
   clearFilterResults(clearSearchResults) {
     if (clearSearchResults) {
-      this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
-        this.courses = this.orderBy.transform(response);
-      });
+      this.getCourses();
     }
   }
 
   ngOnInit() {
-    this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
-      this.courses = this.orderBy.transform(response);
-    });
+    this.getCourses();
     this.crumbsService.removeTailCrumbs();
   }
 }
