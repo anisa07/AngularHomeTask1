@@ -1,5 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
+import {Router} from '@angular/router';
 import {Course} from '../models/course';
 import {CoursesService} from '../courses/courses-service.service';
 
@@ -8,40 +8,54 @@ import {CoursesService} from '../courses/courses-service.service';
   templateUrl: './create-course.component.html',
   styleUrls: ['./create-course.component.css'],
 })
-export class CreateCourseComponent implements OnInit {
+export class CreateCourseComponent implements OnInit, OnChanges {
   @Input() date: Date;
   @Input() duration: string | number;
   @Input() description: string;
   @Input() title: string;
   @Input() data: Course | undefined;
+  @Input() authors: Array<any>;
   createCourse: Boolean = true;
 
   constructor(private router: Router, private coursesService: CoursesService) {
   }
 
-  ngOnInit() {
-    if (this.data) {
-      const {courseData} = this.data;
-
-      this.createCourse = false;
-      this.date = courseData.creationDate;
-      this.duration = courseData.duration;
-      this.title = courseData.title;
-      this.description = courseData.description;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.data.currentValue) {
+      const {date, id, authors, name, description, isTopRated, length} = changes.data.currentValue;
+      this.date = date;
+      this.authors = authors;
+      this.title = name;
+      this.description = description;
+      this.duration = length;
     }
   }
+
+  ngOnInit() {}
 
   save() {
     if (!this.createCourse) {
       this.coursesService.updateCourse({
         date: this.date,
-        duration: this.duration,
-        title: this.title,
+        length: this.duration,
+        name: this.title,
         description: this.description,
-        id: this.data.courseData.id,
+        id: this.data.id,
+        authors: this.authors,
+      }).subscribe(() => {
+        this.router.navigate(['courses']);
+      });
+    } else {
+      this.coursesService.createCourse({
+        date: this.date,
+        length: this.duration,
+        name: this.title,
+        description: this.description,
+        authors: this.authors,
+      }).subscribe(() => {
+        this.router.navigate(['courses']);
       });
     }
-    this.router.navigate(['courses']);
   }
 
   delete() {

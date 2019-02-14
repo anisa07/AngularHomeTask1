@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import * as moment from 'moment';
 
 @Pipe({
@@ -7,7 +7,11 @@ import * as moment from 'moment';
 export class OrderByPipe implements PipeTransform {
 
   transform(data: Array<any>): Array<any> {
-    return data.sort((item1, item2) => item1.courseData.creationDate.getTime() - item2.courseData.creationDate.getTime());
-  }
+    return data.sort((item1, item2) => {
+      const time1 = (new Date(item1.date)).getTime();
+      const time2 = (new Date(item2.date)).getTime();
 
+      return time1 - time2;
+    });
+  }
 }

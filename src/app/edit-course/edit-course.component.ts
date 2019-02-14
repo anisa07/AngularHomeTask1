@@ -9,7 +9,7 @@ import {CrumbsService} from '../crumbs.service';
   styleUrls: ['./edit-course.component.css'],
 })
 export class EditCourseComponent implements OnInit {
-  course;
+  course: any = {};
 
   constructor(private coursesService: CoursesService,
               private route: ActivatedRoute, private crumbsService: CrumbsService) {
@@ -17,9 +17,11 @@ export class EditCourseComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.course = this.coursesService.getCourseById(params['id']) || {};
-      this.crumbsService.getBreadCrumbs();
-      this.crumbsService.addNewCrumb(this.course.courseData.title, []);
+      this.course = this.coursesService.getCourseById(params['id']).subscribe((response: any ) => {
+        this.course = response;
+        this.crumbsService.getBreadCrumbs();
+        this.crumbsService.addNewCrumb(this.course.name, []);
+      });
     });
   }
 

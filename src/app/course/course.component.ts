@@ -15,11 +15,11 @@ export class CourseComponent implements OnInit, OnChanges {
 
   delete() {
     console.log('emit delete in course');
-    this.deleteRequest.emit(this.data.courseData.id);
+    this.deleteRequest.emit(this.data.id);
   }
 
   edit() {
-    this.crumbsService.addNewCrumb(this.data.courseData.title, ['/course', this.data.courseData.id]);
+    this.crumbsService.addNewCrumb(this.data.name, ['/course', this.data.id]);
   }
 
   constructor(private crumbsService: CrumbsService) {

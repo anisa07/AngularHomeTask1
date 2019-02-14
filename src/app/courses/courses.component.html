@@ -1,6 +1,8 @@
 <div class="courses">
-  <app-search [data]="courses" (filterData)="filterCourses($event)" (clearFilter)="clearFilterResults($event)"></app-search>
-  <app-course *ngFor="let data of courses" [data]="data" (deleteRequest)="deleteCourse($event)"></app-course>
+  <app-search [data]="courses" (filterData)="filterCourses($event)"
+              (clearFilter)="clearFilterResults($event)"></app-search>
+  <app-course *ngFor="let data of courses" [data]="data" (deleteRequest)="deleteCourse($event)"
+              (editCreateCourse)="editCreateCourse($event)"></app-course>
   <div class="noData" *ngIf="!courses.length">NO DATA. FEEL FREE TO ADD NEW COURSE</div>
-  <app-load-more></app-load-more>
+  <app-load-more (load)="loadMore()"></app-load-more>
 </div>

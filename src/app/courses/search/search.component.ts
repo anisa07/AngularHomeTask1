@@ -15,7 +15,8 @@ export class SearchComponent implements OnInit, OnChanges {
   @Output() clearFilter = new EventEmitter<any>();
 
   search() {
-    this.filterData.emit(this.listPipe.transform(this.data, this.searchInput));
+    this.filterData.emit(this.searchInput);
+    // this.filterData.emit(this.listPipe.transform(this.data, this.searchInput));
   }
 
   clear() {

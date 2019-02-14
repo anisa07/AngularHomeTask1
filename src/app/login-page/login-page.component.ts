@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginService } from './login.service';
+import {Component, OnInit, Input} from '@angular/core';
+import {Router} from '@angular/router';
+import {LoginService} from './login.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +11,8 @@ export class LoginPageComponent implements OnInit {
   @Input() email: string;
   @Input() password: string;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {
+  }
 
   ngOnInit() {
     if (this.loginService.isAuthenticated()) {
@@ -20,9 +21,16 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    this.loginService.login(this.email);
-    console.log('logged in successfully');
-    this.router.navigate(['courses']);
+    this.loginService.login(this.email, this.password).subscribe((response: {token: string}) => {
+        const storage = window.localStorage;
+
+        storage.setItem('SuperSecretLogin', this.email);
+        storage.setItem('AmazingToken', response.token);
+        this.router.navigate(['courses']);
+      },
+      error => {
+        console.log('Error', error);
+      });
   }
 
   loginEnable() {
