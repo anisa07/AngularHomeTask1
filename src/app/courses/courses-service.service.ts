@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Course} from '../models/course';
 import {HttpClient} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 
 const BASE_URL = 'http://localhost:3004/courses';
 
@@ -14,8 +16,12 @@ export class CoursesService  {
     this.courses = [];
   }
 
-  searchCourses(searchInput) {
-    return this.http.get(`${BASE_URL}`, {params: {textFragment: searchInput}});
+  searchCourses(terms: Observable<string>) {
+    return terms.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => this.searchEntries(term)));
+  }
+
+  searchEntries(term) {
+    return this.http.get(`${BASE_URL}`, {params: {textFragment: term}});
   }
 
   getCourses(start, count) {

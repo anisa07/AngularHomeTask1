@@ -35,9 +35,9 @@ export class CoursesComponent implements OnInit {
   }
 
   filterCourses(searchInput) {
-    this.coursesService.searchCourses(searchInput).subscribe((response: Array<any>) => {
-      this.courses = this.orderBy.transform(response);
-    });
+    // this.coursesService.searchCourses(searchInput).subscribe((response: Array<any>) => {
+    //   this.courses = this.orderBy.transform(response);
+    // });
   }
 
   loadMore() {
