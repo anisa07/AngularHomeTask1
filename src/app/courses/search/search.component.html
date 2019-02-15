@@ -1,7 +1,6 @@
 <div class="searchContainer">
   <div class="search">
-    <input placeholder="Text to search" (ngChange)="searchTerm$.next($event.target.value)"/>
-    <a class="btn search" (click)="search()">Search</a>
+    <input placeholder="Text to search" [(ngModel)]="searchInput" (keyup)="search($event.target.value)"/>
     <a class="btn search" (click)="clear()">Clear</a>
   </div>
   <a class="btn" (click)="add()">Add course</a>

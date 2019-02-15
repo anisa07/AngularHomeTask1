@@ -16,8 +16,9 @@ export class CoursesService  {
     this.courses = [];
   }
 
-  searchCourses(terms: Observable<string>) {
-    return terms.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => this.searchEntries(term)));
+  searchCourses(value) {
+    // return terms.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => this.searchEntries(term)));
+    return this.http.get(`${BASE_URL}`, {params: {textFragment: value}});
   }
 
   searchEntries(term) {

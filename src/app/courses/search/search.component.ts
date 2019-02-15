@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
-import {Subject} from 'rxjs';
+import {Subject, Observable, from} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 import {ListPipe} from '../../pipes/list-pipe.pipe';
 import {Course} from '../../models/course';
 import {CoursesService} from '../courses-service.service';
@@ -15,16 +16,14 @@ export class SearchComponent implements OnInit, OnChanges {
   @Input() data: Array<Course>;
   @Output() filterData = new EventEmitter<any>();
   @Output() clearFilter = new EventEmitter<any>();
-  searchTerm$ = new Subject<string>();
+  // searchTerm$ = new Subject<string>();
 
-  search() {
-    // this.filterData.emit(this.searchInput);
-    // this.filterData.emit(this.listPipe.transform(this.data, this.searchInput));
-    // this.coursesService.searchCourses(this.searchTerm$);
-   // this.filterData.emit(this.coursesService.searchCourses(this.searchTerm$));
-      // .subscribe(results => {
-      //   this.results = results.results;
-      // });
+  search(value) {
+    if (value && value.length > 3) {
+      const search = from(this.coursesService.searchCourses(value))
+        .pipe(debounceTime(400), distinctUntilChanged());
+      search.subscribe(courses => this.filterData.emit(courses));
+    }
   }
 
   clear() {
@@ -37,11 +36,11 @@ export class SearchComponent implements OnInit, OnChanges {
   }
 
   constructor(private listPipe: ListPipe, private router: Router, private coursesService: CoursesService) {
-    this.coursesService.searchCourses(this.searchTerm$)
-      .subscribe(results => {
-        console.log(results);
-        // this.filterData.emit(results.results);
-      });
+    // this.coursesService.searchCourses(this.searchTerm$)
+    //   .subscribe(results => {
+    //     console.log(results);
+    //     // this.filterData.emit(results.results);
+    //   });
   }
 
   ngOnInit() {
