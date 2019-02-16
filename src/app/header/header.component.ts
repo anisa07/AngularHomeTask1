@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {interval} from 'rxjs';
+import {flatMap, timeInterval} from 'rxjs/operators';
 import {LoginService} from '../login-page/login.service';
 import {CrumbsService} from '../crumbs.service';
+
 
 @Component({
   selector: 'app-header',
@@ -11,12 +14,7 @@ import {CrumbsService} from '../crumbs.service';
 export class HeaderComponent implements OnInit {
   login: string;
 
-  constructor(private loginService: LoginService, private router: Router, private crumbsService: CrumbsService) {}
-
-  userName() {
-    this.loginService.getUserInfo().subscribe((response: { login: string }) => {
-      this.login = response.login || '';
-    });
+  constructor(private loginService: LoginService, private router: Router, private crumbsService: CrumbsService) {
   }
 
   logOut() {
@@ -27,9 +25,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.loginService.isAuthenticated()) {
-      this.userName();
-    }
+    interval(5000)
+      .pipe(timeInterval(), flatMap((value: any) => this.loginService.getUserInfo()))
+      .subscribe((data: any) => {
+        this.login = data.login;
+      });
   }
-
 }

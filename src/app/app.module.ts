@@ -28,6 +28,7 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { Interceptor } from './login-page/interceptor';
+import { LoadderComponent } from './loadder/loadder.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { Interceptor } from './login-page/interceptor';
     CreateCourseComponent,
     NotFoundComponent,
     EditCourseComponent,
+    LoadderComponent,
   ],
   imports: [
     BrowserModule,

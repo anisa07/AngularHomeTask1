@@ -16,7 +16,6 @@ export class SearchComponent implements OnInit, OnChanges {
   @Input() data: Array<Course>;
   @Output() filterData = new EventEmitter<any>();
   @Output() clearFilter = new EventEmitter<any>();
-  // searchTerm$ = new Subject<string>();
 
   search(value) {
     if (value && value.length > 3) {
