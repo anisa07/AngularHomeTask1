@@ -1,25 +1,36 @@
 import {Injectable} from '@angular/core';
 import {Course} from '../models/course';
 import {HttpClient} from '@angular/common/http';
+import {LoadderService} from '../loadder.service';
+import {from} from 'rxjs';
+import {finalize} from 'rxjs/operators';
 
 const BASE_URL = 'http://localhost:3004/courses';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CoursesService  {
+export class CoursesService {
   courses: Array<Course>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private  loadder: LoadderService) {
     this.courses = [];
   }
 
-  searchCourses(searchInput) {
-    return this.http.get(`${BASE_URL}`, {params: {textFragment: searchInput}});
+  searchCourses(value) {
+    this.loadder.showLoader();
+    return from(this.http.get(`${BASE_URL}`, {params: {textFragment: value}}))
+      .pipe(finalize(() => {
+        this.loadder.hideLoader();
+      }));
   }
 
   getCourses(start, count) {
-    return this.http.get(`${BASE_URL}?start=${start}&count=${count}`);
+    this.loadder.showLoader();
+    return from(this.http.get(`${BASE_URL}?start=${start}&count=${count}`))
+      .pipe(finalize(() => {
+        this.loadder.hideLoader();
+      }));
   }
 
   getInitialCourses(): Course[] {
@@ -60,29 +71,45 @@ export class CoursesService  {
   }
 
   createCourse({date, length, name, description, authors}) {
-    return this.http.post(`${BASE_URL}`, JSON.stringify({
+    this.loadder.showLoader();
+    return from(this.http.post(`${BASE_URL}`, JSON.stringify({
       date,
       length,
       description,
       authors,
-    }));
+    })))
+      .pipe(finalize(() => {
+        this.loadder.hideLoader();
+      }));
   }
 
   getCourseById(id) {
-   return this.http.get(`${BASE_URL}/${id}`);
+    this.loadder.showLoader();
+    return from(this.http.get(`${BASE_URL}/${id}`))
+      .pipe(finalize(() => {
+        this.loadder.hideLoader();
+      }));
   }
 
   updateCourse({date, length, name, description, id, authors}) {
-    return this.http.put(`${BASE_URL}/${id}`, JSON.stringify({
+    this.loadder.showLoader();
+    return from(this.http.put(`${BASE_URL}/${id}`, JSON.stringify({
       date,
       length,
       description,
       id,
       authors,
-    }));
+    })))
+      .pipe(finalize(() => {
+        this.loadder.hideLoader();
+      }));
   }
 
   removeCourse(id) {
-    return this.http.delete(`${BASE_URL}/${id}`);
+    this.loadder.showLoader();
+    return from(this.http.delete(`${BASE_URL}/${id}`))
+      .pipe(finalize(() => {
+        this.loadder.hideLoader();
+      }));
   }
 }

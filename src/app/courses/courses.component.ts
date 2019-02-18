@@ -34,10 +34,8 @@ export class CoursesComponent implements OnInit {
     }
   }
 
-  filterCourses(searchInput) {
-    this.coursesService.searchCourses(searchInput).subscribe((response: Array<any>) => {
-      this.courses = this.orderBy.transform(response);
-    });
+  filterCourses(filteredCourses) {
+    this.courses = this.orderBy.transform(filteredCourses);
   }
 
   loadMore() {
