@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router, CanActivate} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {from} from 'rxjs';
-import {map, finalize} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {LoadderService} from '../loadder.service';
 
 const BASE_URL = 'http://localhost:3004/auth';
@@ -12,21 +12,35 @@ const BASE_URL = 'http://localhost:3004/auth';
 })
 export class LoginService implements CanActivate {
 
-  constructor(public router: Router, private http: HttpClient, private  loadder: LoadderService) {
+  constructor(public router: Router, private http: HttpClient, private  loader: LoadderService) {
   }
 
   login(login, password) {
-    this.loadder.showLoader();
-    return from(this.http.post(`${BASE_URL}/login`, JSON.stringify({
+    return this.http.post(`${BASE_URL}/login`, JSON.stringify({
       login,
       password,
-    }))).pipe(finalize(() => {this.loadder.hideLoader(); }));
+    }));
   }
 
   logOut() {
+    console.log('here')
     const storage = window.localStorage;
 
     storage.clear();
+    return this.router.navigate(['login']);
+  }
+
+  successfulLogin(token) {
+    this.loader.hideLoader();
+
+    const storage = window.localStorage;
+    storage.setItem('AmazingToken', token);
+    this.router.navigate(['courses']);
+  }
+
+  loginFailure(error) {
+    this.loader.hideLoader();
+    console.log(error);
   }
 
   getToken() {
@@ -44,13 +58,11 @@ export class LoginService implements CanActivate {
 
       return this.http.post(`${BASE_URL}/userinfo`, JSON.stringify({}), {headers: headers});
     }
-    return Promise.resolve({});
+    return from(new Promise(resolve => resolve({})));
   }
 
   isAuthenticated() {
-    const storage = window.localStorage;
-
-    return !!storage.getItem('AmazingToken');
+    return !!this.getToken();
   }
 
   canActivate() {

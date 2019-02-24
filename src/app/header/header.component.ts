@@ -4,7 +4,9 @@ import {interval} from 'rxjs';
 import {flatMap, timeInterval} from 'rxjs/operators';
 import {LoginService} from '../login-page/login.service';
 import {CrumbsService} from '../crumbs.service';
-
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../store/reducers/index';
+import * as authActions from '../store/actions/login';
 
 @Component({
   selector: 'app-header',
@@ -14,21 +16,22 @@ import {CrumbsService} from '../crumbs.service';
 export class HeaderComponent implements OnInit {
   login: string;
 
-  constructor(private loginService: LoginService, private router: Router, private crumbsService: CrumbsService) {
-  }
+  constructor(private loginService: LoginService, private router: Router,
+              private crumbsService: CrumbsService,
+              private store: Store<fromRoot.State>) {}
 
   logOut() {
-    this.loginService.logOut();
-    this.crumbsService.removeCrumbs();
     this.login = '';
-    this.router.navigate(['login']);
+    this.crumbsService.removeCrumbs();
+    // this.loginService.logOut();
+    this.store.dispatch(new authActions.Logout());
   }
 
   ngOnInit() {
-    interval(5000)
-      .pipe(timeInterval(), flatMap((value: any) => this.loginService.getUserInfo()))
-      .subscribe((data: any) => {
-        this.login = data.login;
-      });
+    this.store.subscribe((data: any) => {
+      if (data && data.auth) {
+        this.login = data.auth.user.login;
+      }
+    });
   }
 }

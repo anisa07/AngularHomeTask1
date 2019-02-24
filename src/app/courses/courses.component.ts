@@ -3,6 +3,9 @@ import {OrderByPipe} from '../pipes/order-by.pipe';
 import {Course} from '../models/course';
 import {CoursesService} from './courses-service.service';
 import {CrumbsService} from '../crumbs.service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../store/reducers/index';
+import * as authActions from '../store/actions/login';
 
 @Component({
   selector: 'app-courses',
@@ -16,7 +19,8 @@ export class CoursesComponent implements OnInit {
 
   constructor(private orderBy: OrderByPipe,
               private coursesService: CoursesService,
-              private crumbsService: CrumbsService) {
+              private crumbsService: CrumbsService,
+              private store: Store<fromRoot.State>) {
   }
 
   getCourses() {
@@ -52,5 +56,6 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
     this.getCourses();
     this.crumbsService.removeTailCrumbs();
+    this.store.dispatch(new authActions.GetLoginInfo());
   }
 }

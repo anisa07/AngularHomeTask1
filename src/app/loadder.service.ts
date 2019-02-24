@@ -12,12 +12,10 @@ export class LoadderService {
   constructor() { }
 
   showLoader(): void {
-    console.log('Show');
     this.loaderSubject.next(<any>{show: true});
   }
 
   hideLoader(): void {
-    console.log('Hide');
     this.loaderSubject.next(<any>{show: false});
   }
 }
