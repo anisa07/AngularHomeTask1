@@ -24,20 +24,19 @@ export class AuthEffects {
   Login: Observable<any> = this.actions$
     .pipe(
       ofType(AuthActionTypes.Login),
-      switchMap((data: any) => {
-        const { payload } = data;
-
+      map((action: any) => action.payload),
+      switchMap((payload: any) => {
         return this.loginService.login(payload.email, payload.password)
-          .pipe(
-            switchMap((response: any) => {
-              this.loginService.successfulLogin(response.token);
+        .pipe(
+          map((response: any) => {
+            this.loginService.successfulLogin(response.token);
 
-              return of(this.store.dispatch(new authActions.LoginSuccess()));
-            }),
-            catchError((error: any) => {
-              return of(this.store.dispatch(new authActions.LoginFailure(error)));
-            })
-          );
+            return of(new authActions.LoginSuccess());
+          }),
+          catchError((error: any) => {
+            return of(new authActions.LoginFailure(error));
+          })
+        );
       })
     );
 
