@@ -27,6 +27,9 @@ export function reducer(state = initialState, action: authActions.AuthActions): 
     case authActions.AuthActionTypes.Logout:
       return handleLogout(state, action);
 
+    case authActions.AuthActionTypes.LogoutSuccess:
+      return handleLogoutSuccess(state, action);
+
     case authActions.AuthActionTypes.GetLoginInfo:
       return handleGetLoginInfo(state, action);
 
@@ -56,6 +59,19 @@ function handleSuccess(state: State, action: authActions.LoginSuccess): State {
 function handleLogout(state: State, action: authActions.Logout): State {
   return {
     ...state,
+  };
+}
+
+function handleLogoutSuccess(state: State, action: authActions.LogoutSuccess): State {
+  return {
+    user: {
+      login: '',
+      name: {
+        first: '',
+        last: '',
+      },
+      id: 0,
+    },
   };
 }
 

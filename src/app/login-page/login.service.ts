@@ -23,7 +23,6 @@ export class LoginService implements CanActivate {
   }
 
   logOut() {
-    console.log('here')
     const storage = window.localStorage;
 
     storage.clear();

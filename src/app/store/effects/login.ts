@@ -31,7 +31,7 @@ export class AuthEffects {
           map((response: any) => {
             this.loginService.successfulLogin(response.token);
 
-            return of(new authActions.LoginSuccess());
+            return new authActions.LoginSuccess();
           }),
           catchError((error: any) => {
             return of(new authActions.LoginFailure(error));
@@ -43,8 +43,13 @@ export class AuthEffects {
   @Effect()
   LogOut: Observable<any> = this.actions$.pipe(
     ofType(AuthActionTypes.Logout),
-    switchMap(() => {
-      return this.loginService.logOut();
+    map(() => {
+      const storage = window.localStorage;
+
+      storage.clear();
+      this.router.navigate(['login']);
+
+      return new authActions.LogoutSuccess();
     })
   );
 
@@ -55,10 +60,9 @@ export class AuthEffects {
       switchMap(() => {
         return this.loginService.getUserInfo()
           .pipe(
-            map((response: any) => {
-              this.store.dispatch(new authActions.LoginInfo(response));
-            })
+            map((response: any) => new authActions.LoginInfo(response))
           );
       })
     );
 }
+

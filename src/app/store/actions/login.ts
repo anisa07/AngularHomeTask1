@@ -7,6 +7,7 @@ export enum AuthActionTypes {
   LoginFailure = '[Auth] Login Failure',
   LoginInfo = '[Auth] Login Info',
   GetLoginInfo = '[Auth] Get Login Info',
+  LogoutSuccess = '[Auth] Logout Success',
 }
 
 export class Login implements Action {
@@ -19,10 +20,12 @@ export class Logout implements Action {
   readonly type = AuthActionTypes.Logout;
 }
 
+export class LogoutSuccess implements Action {
+  readonly type = AuthActionTypes.LogoutSuccess;
+}
+
 export class LoginSuccess implements Action {
   readonly type = AuthActionTypes.LoginSuccess;
-
-  // constructor(public payload: string) {}
 }
 
 export class LoginFailure implements Action {
@@ -41,4 +44,4 @@ export class GetLoginInfo implements Action {
   readonly type = AuthActionTypes.GetLoginInfo;
 }
 
-export type AuthActions = Login | Logout | LoginSuccess | LoginFailure | LoginInfo | GetLoginInfo;
+export type AuthActions = Login | Logout | LoginSuccess | LoginFailure | LoginInfo | GetLoginInfo | LogoutSuccess;
