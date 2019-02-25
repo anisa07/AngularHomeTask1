@@ -88,7 +88,6 @@ function handleGetLoginInfo(state: State, action: authActions.GetLoginInfo): Sta
 }
 
 function handleLoginInfo(state: State, action: authActions.LoginInfo): State {
-  // console.log(action.payload)
   return {
     user: {
       login: action.payload.login,

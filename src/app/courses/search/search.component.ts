@@ -43,10 +43,10 @@ export class SearchComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('ngOnInit');
+    // console.log('ngOnInit');
   }
 
   ngOnChanges(changes) {
-    console.log('ngOnChange', changes);
+    // console.log('ngOnChange', changes);
   }
 }

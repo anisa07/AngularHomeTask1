@@ -10,7 +10,7 @@ export class LoadMoreComponent implements OnInit {
 
   loadMore() {
     this.load.emit();
-    console.log('Load More');
+    // console.log('Load More');
   }
 
   constructor() { }

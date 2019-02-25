@@ -6,6 +6,7 @@ import {CrumbsService} from '../crumbs.service';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../store/reducers/index';
 import * as authActions from '../store/actions/login';
+import * as coursesActions from '../store/actions/courses';
 
 @Component({
   selector: 'app-courses',
@@ -23,18 +24,17 @@ export class CoursesComponent implements OnInit {
               private store: Store<fromRoot.State>) {
   }
 
-  getCourses() {
-    this.coursesService.getCourses(0, this.count).subscribe((response: Array<any>) => {
-      this.courses = this.orderBy.transform(response);
-    });
+  getCourses(payload) {
+    this.store.dispatch(new coursesActions.GetCoursesInfo(payload));
   }
 
   deleteCourse(id) {
     const removeCourse = confirm('Do you really want to delete this course?');
     if (removeCourse) {
-      this.coursesService.removeCourse(id).subscribe(() => {
-        this.getCourses();
-      });
+      this.store.dispatch(new coursesActions.DeleteCourses(id));
+      // this.coursesService.removeCourse(id).subscribe(() => {
+      // //  this.getCourses();
+      // });
     }
   }
 
@@ -44,18 +44,23 @@ export class CoursesComponent implements OnInit {
 
   loadMore() {
     this.count = this.count + 1;
-    this.getCourses();
+    this.getCourses({start: 0, count: this.count});
   }
 
   clearFilterResults(clearSearchResults) {
     if (clearSearchResults) {
-      this.getCourses();
+      this.getCourses({start: 0});
     }
   }
 
   ngOnInit() {
-    this.getCourses();
+    this.getCourses({start: 0, count: 10});
     this.crumbsService.removeTailCrumbs();
     this.store.dispatch(new authActions.GetLoginInfo());
+    this.store.subscribe((data: any) => {
+      if (data && data.courses) {
+        this.courses = this.orderBy.transform(data.courses.courses);
+      }
+    });
   }
 }

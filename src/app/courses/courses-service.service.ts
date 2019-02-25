@@ -26,48 +26,7 @@ export class CoursesService {
   }
 
   getCourses(start, count) {
-    this.loadder.showLoader();
-    return from(this.http.get(`${BASE_URL}?start=${start}&count=${count}`))
-      .pipe(finalize(() => {
-        this.loadder.hideLoader();
-      }));
-  }
-
-  getInitialCourses(): Course[] {
-    return [
-      new Course({
-        id: '123bbb',
-        title: 'Second Video',
-        creationDate: new Date('12 15 2018'),
-        duration: 100,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-      new Course({
-        id: '123aaa',
-        title: 'First Video',
-        creationDate: new Date('10 06 2018'),
-        duration: 120,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-      new Course({
-        id: '123ccc',
-        title: 'Third Video',
-        creationDate: new Date('01 15 2019'),
-        duration: 55,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-      new Course({
-        id: '123ddd',
-        title: 'Forth Video',
-        creationDate: new Date('01 15 2018'),
-        duration: 156,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend tristique luctus. ' +
-          'Praesent interdum, magna et placerat ultrices, mauris tortor molestie mauris, sed fermentum felis elit sed eros.',
-      }),
-    ];
+    return this.http.get(`${BASE_URL}?start=${start}&count=${count}`);
   }
 
   createCourse({date, length, name, description, authors}) {
@@ -107,9 +66,6 @@ export class CoursesService {
 
   removeCourse(id) {
     this.loadder.showLoader();
-    return from(this.http.delete(`${BASE_URL}/${id}`))
-      .pipe(finalize(() => {
-        this.loadder.hideLoader();
-      }));
+    return this.http.delete(`${BASE_URL}/${id}`);
   }
 }

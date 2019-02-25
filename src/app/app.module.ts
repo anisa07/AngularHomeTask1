@@ -32,6 +32,7 @@ import { EditCourseComponent } from './edit-course/edit-course.component';
 import { Interceptor } from './login-page/interceptor';
 import { LoadderComponent } from './loadder/loadder.component';
 import { AuthEffects } from './store/effects/login';
+import { CoursesEffects } from './store/effects/courses';
 import { reducers } from './store/reducers/index';
 
 @NgModule({
@@ -65,7 +66,7 @@ import { reducers } from './store/reducers/index';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, CoursesEffects]),
     StoreModule.forRoot(reducers),
   ],
   bootstrap: [AppComponent],
