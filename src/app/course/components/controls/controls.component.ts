@@ -13,7 +13,7 @@ export class ControlsComponent implements OnInit {
   @Input() id: string;
 
   deleteControl() {
-    console.log('emit delete in controls');
+    // console.log('emit delete in controls');
     this.deleteRequest.emit();
   }
 

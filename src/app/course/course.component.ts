@@ -14,7 +14,7 @@ export class CourseComponent implements OnInit, OnChanges {
   fakeVar: string;
 
   delete() {
-    console.log('emit delete in course');
+    // console.log('emit delete in course');
     this.deleteRequest.emit(this.data.id);
   }
 
@@ -23,17 +23,17 @@ export class CourseComponent implements OnInit, OnChanges {
   }
 
   constructor(private crumbsService: CrumbsService) {
-    this.fakeVar = 'fakeVar init in constructor';
-    console.log('log in course constructor');
+    // this.fakeVar = 'fakeVar init in constructor';
+   // console.log('log in course constructor');
   }
 
   ngOnInit() {
-    console.log('log in course hook ngOnInit');
-    console.log(this.fakeVar);
+    // console.log('log in course hook ngOnInit');
+   // console.log(this.fakeVar);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('onChange hook called');
-    console.log('changing', changes);
+    // console.log('onChange hook called');
+    // console.log('changing', changes);
   }
 }
