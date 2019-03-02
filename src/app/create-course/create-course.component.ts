@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
 import {Router} from '@angular/router';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {Course} from '../models/course';
 import {CoursesService} from '../courses/courses-service.service';
 
@@ -17,52 +18,51 @@ export class CreateCourseComponent implements OnInit, OnChanges {
   @Input() authors: Array<any>;
   createCourse: Boolean = true;
 
-  constructor(private router: Router, private coursesService: CoursesService) {
-  }
+  constructor(private router: Router, private coursesService: CoursesService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.data.currentValue) {
-      const {date, id, authors, name, description, isTopRated, length} = changes.data.currentValue;
-      this.date = date;
-      this.authors = authors;
-      this.title = name;
-      this.description = description;
-      this.duration = length;
-    }
+    // if (changes.data.currentValue) {
+    //   const {date, id, authors, name, description, isTopRated, length} = changes.data.currentValue;
+    //   this.date = date;
+    //   this.authors = authors;
+    //   this.title = name;
+    //   this.description = description;
+    //   this.duration = length;
+    // }
   }
 
   ngOnInit() {}
 
   save() {
-    if (!this.createCourse) {
-      this.coursesService.updateCourse({
-        date: this.date,
-        length: this.duration,
-        name: this.title,
-        description: this.description,
-        id: this.data.id,
-        authors: this.authors,
-      }).subscribe(() => {
-        this.router.navigate(['courses']);
-      });
-    } else {
-      this.coursesService.createCourse({
-        date: this.date,
-        length: this.duration,
-        name: this.title,
-        description: this.description,
-        authors: this.authors,
-      }).subscribe(() => {
-        this.router.navigate(['courses']);
-      });
-    }
+    // if (!this.createCourse) {
+    //   this.coursesService.updateCourse({
+    //     date: this.date,
+    //     length: this.duration,
+    //     name: this.title,
+    //     description: this.description,
+    //     id: this.data.id,
+    //     authors: this.authors,
+    //   }).subscribe(() => {
+    //     this.router.navigate(['courses']);
+    //   });
+    // } else {
+    //   this.coursesService.createCourse({
+    //     date: this.date,
+    //     length: this.duration,
+    //     name: this.title,
+    //     description: this.description,
+    //     authors: this.authors,
+    //   }).subscribe(() => {
+    //     this.router.navigate(['courses']);
+    //   });
+    // }
   }
 
   delete() {
-    this.router.navigate(['courses']);
+  //  this.router.navigate(['courses']);
   }
 
   cancel() {
-    this.router.navigate(['courses']);
+  //  this.router.navigate(['courses']);
   }
 }

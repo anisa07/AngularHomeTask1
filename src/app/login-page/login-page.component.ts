@@ -1,6 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import { Store } from '@ngrx/store';
+import {Store} from '@ngrx/store';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {LoginService} from './login.service';
 import * as fromRoot from '../store/reducers/index';
 import * as authActions from '../store/actions/login';
@@ -11,10 +12,20 @@ import * as authActions from '../store/actions/login';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent implements OnInit {
-  @Input() email: string;
-  @Input() password: string;
+  form: FormGroup;
 
-  constructor(private loginService: LoginService, private router: Router, private store: Store<fromRoot.State>) {}
+  email = new FormControl('', Validators.required);
+  password = new FormControl('', Validators.required);
+
+  constructor(private loginService: LoginService,
+              private router: Router,
+              private store: Store<fromRoot.State>,
+              fb: FormBuilder) {
+    this.form = fb.group({
+      'email': this.email,
+      'password': this.password,
+    });
+  }
 
   ngOnInit() {
     if (this.loginService.isAuthenticated()) {
@@ -23,11 +34,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    this.store.dispatch(new authActions.Login({email: this.email, password: this.password}));
+    this.store.dispatch(new authActions.Login({email: this.email.value, password: this.password.value}));
   }
-
-  loginEnable() {
-    return !!this.email && !!this.password;
-  }
-
 }

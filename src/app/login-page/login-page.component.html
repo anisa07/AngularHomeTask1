@@ -1,19 +1,20 @@
 <div class="login-page">
   <div class="login-container">
     <p class="login-title">Login</p>
-    <div class="login-controls">
+    <form [formGroup]="form" class="login-controls" (ngSubmit)="login()">
       <div class="email">
         <p>Email</p>
-        <input placeholder="Please enter email" [(ngModel)]="email"/>
+        <input placeholder="Please enter email" formControlName="email"/>
       </div>
       <div class="pwd">
         <p>Password</p>
-        <input placeholder="Please enter password" type="password" [(ngModel)]="password"/>
+        <input placeholder="Please enter password" type="password" formControlName="password"/>
       </div>
-      <a
+      <button
         class="btn"
-        [class.disabledLogin]="!loginEnable() ? true : null"
-        (click)="login()">Login</a>
-    </div>
+        [disabled]="!form.valid"
+        type="submit"
+      >Login</button>
+    </form>
   </div>
 </div>

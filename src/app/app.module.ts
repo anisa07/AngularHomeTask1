@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
@@ -68,6 +68,7 @@ import { reducers } from './store/reducers/index';
     RouterModule.forRoot(routes),
     EffectsModule.forRoot([AuthEffects, CoursesEffects]),
     StoreModule.forRoot(reducers),
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
   providers: [ListPipe, OrderByPipe, {
