@@ -1,27 +1,35 @@
-<div class="content-container">
+<form [formGroup]="form" class="content-container" (ngSubmit)="save()">
   <div>
     <p class="element-title">Title:</p>
-    <input type="text" class="wide-element" [(ngModel)]="title"/>
+    <input type="text" class="wide-element" formControlName="title"/>
   </div>
   <div>
     <p class="element-title">Description:</p>
-    <textarea rows="5" class="wide-element" [(ngModel)]="description"></textarea>
+    <textarea rows="5" class="wide-element" formControlName="description"></textarea>
   </div>
   <div>
     <p class="element-title">Date:</p>
-    <input type="text" [(ngModel)]="date"/>
+    <input type="text" formControlName="date"/>
   </div>
   <div>
     <p class="element-title">Duration:</p>
-    <input type="text" [(ngModel)]="duration"/><span class="duration">{{duration | timePipe}}</span>
+    <input type="text" formControlName="duration"/>
+    <span class="duration">{{form.get('duration').value | timePipe}}</span>
   </div>
   <div>
     <p class="element-title">Authors:</p>
-    <input type="text" class="wide-element"/>
+    <!--<input type="text" class="wide-element"/>-->
+    <!--[authors]="authors"-->
+    <app-authors
+      [data]="form.get('authors').value"
+      [formControl]="authors"
+      (emitAddAuthor)="addAuthor($event)"
+      (emitDeleteAuthor)="deleteAuthor($event)">
+    </app-authors>
   </div>
   <div class="controls">
-    <a class="btn" (click)="save()">Save</a>
-    <a *ngIf="createCourse" class="btn" (click)="delete()">Delete</a>
-    <a *ngIf="!createCourse" class="btn" (click)="cancel()">Cancel</a>
+    <button class="btn" type="submit" [disabled]="!form.valid">Save</button>
+    <button *ngIf="createCourse" class="btn" (click)="delete()">Delete</button>
+    <button *ngIf="!createCourse" class="btn" (click)="cancel()">Cancel</button>
   </div>
-</div>
+</form>

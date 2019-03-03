@@ -1,0 +1,12 @@
+<tag-input [ngModel]="authors"
+           (onAdd)="addAuthor($event)"
+           (onRemove)="removeAuthor($event)"
+>
+  <tag-input-dropdown [showDropdownIfEmpty]="true"
+                      [autocompleteItems]="displayItems"
+  >
+    <ng-template let-item="item" let-index="index">
+      {{ item.display }}
+    </ng-template>
+  </tag-input-dropdown>
+</tag-input>

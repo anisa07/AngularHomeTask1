@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagInputModule } from 'ngx-chips';
 import { NgModule, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -34,6 +36,7 @@ import { LoadderComponent } from './loadder/loadder.component';
 import { AuthEffects } from './store/effects/login';
 import { CoursesEffects } from './store/effects/courses';
 import { reducers } from './store/reducers/index';
+import { AuthorsComponent } from './create-course/authors/authors.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import { reducers } from './store/reducers/index';
     NotFoundComponent,
     EditCourseComponent,
     LoadderComponent,
+    AuthorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +73,8 @@ import { reducers } from './store/reducers/index';
     EffectsModule.forRoot([AuthEffects, CoursesEffects]),
     StoreModule.forRoot(reducers),
     ReactiveFormsModule,
+    TagInputModule,
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent],
   providers: [ListPipe, OrderByPipe, {
