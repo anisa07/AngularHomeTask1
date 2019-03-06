@@ -6,6 +6,7 @@ import {from} from 'rxjs';
 import {finalize} from 'rxjs/operators';
 
 const BASE_URL = 'http://localhost:3004/courses';
+const AUTHORS = 'http://localhost:3004/authors';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,10 @@ export class CoursesService {
 
   getCourses(start, count) {
     return this.http.get(`${BASE_URL}?start=${start}&count=${count}`);
+  }
+
+  getAuthors() {
+    return this.http.get(`${AUTHORS}`);
   }
 
   createCourse({date, length, name, description, authors}) {

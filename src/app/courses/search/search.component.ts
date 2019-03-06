@@ -1,7 +1,8 @@
 import {Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
-import {Subject, Observable, from} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
+import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
+import {from} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {ListPipe} from '../../pipes/list-pipe.pipe';
 import {Course} from '../../models/course';
 import {CoursesService} from '../courses-service.service';
@@ -12,10 +13,12 @@ import {CoursesService} from '../courses-service.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit, OnChanges {
-  @Input() searchInput: string;
   @Input() data: Array<Course>;
   @Output() filterData = new EventEmitter<any>();
   @Output() clearFilter = new EventEmitter<any>();
+  form: FormGroup;
+
+  searchInput = new FormControl();
 
   search(value) {
     if (value && value.length > 3) {
@@ -27,24 +30,24 @@ export class SearchComponent implements OnInit, OnChanges {
 
   clear() {
     this.clearFilter.emit(true);
-    this.searchInput = '';
+    this.form.reset();
   }
 
   add() {
     this.router.navigate(['create/new']);
   }
 
-  constructor(private listPipe: ListPipe, private router: Router, private coursesService: CoursesService) {
-    // this.coursesService.searchCourses(this.searchTerm$)
-    //   .subscribe(results => {
-    //     console.log(results);
-    //     // this.filterData.emit(results.results);
-    //   });
+  constructor(
+    private listPipe: ListPipe,
+    private router: Router,
+    private coursesService: CoursesService,
+    fb: FormBuilder) {
+    this.form = fb.group({
+      'searchInput': this.searchInput,
+    });
   }
 
-  ngOnInit() {
-    // console.log('ngOnInit');
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes) {
     // console.log('ngOnChange', changes);

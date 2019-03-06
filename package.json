@@ -26,6 +26,7 @@
     "@ngrx/store-devtools": "^7.2.0",
     "core-js": "^2.6.0",
     "moment": "^2.23.0",
+    "ngx-chips": "^2.0.0-beta.0",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },
